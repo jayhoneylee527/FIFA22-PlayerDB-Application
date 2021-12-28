@@ -47,8 +47,8 @@ def show_players(df, age_range, val, nation, league, club=None, position=None):
 	df = df[(df['value_eur'] >= lower_bound) & (df['value_eur'] <= upper_bound)]
 	
 	df.set_index('short_name', inplace=True)
-	df.astype({'value_eur': 'int32', 'wage_eur': 'int32'})
-	st.dataframe(df[['overall','potential','age','player_positions','value_eur','wage_eur','club_name']])
+	st.dataframe(df[['overall','potential','age','player_positions','value_eur','wage_eur','club_name']] \
+		.style.format({'value_eur': '{:.0f}', 'wage_eur': '{:.0f}'}))
 	st.markdown("")
 
 
