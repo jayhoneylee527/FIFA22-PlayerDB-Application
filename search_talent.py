@@ -48,7 +48,7 @@ def show_players(df, age_range, val, nation, league, club=None, position=None):
 	
 	df.set_index('short_name', inplace=True)
 	df.round({'value_eur': 0, 'wage_eur': 0})
-	st.dataframe(df[['overall','potential','age','player_positions','value_eur','wage_eur','club_name']].style.format({"value_eur": "{:.1}"}))
+	st.dataframe(df[['overall','potential','age','player_positions','value_eur','wage_eur','club_name']])
 	st.markdown("")
 
 
