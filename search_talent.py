@@ -53,7 +53,7 @@ def show_players(df, age_range, val, nation, league, club=None, position=None):
 	return df
 
 # Callback function 
-def update_df(df_updated):
+def update_traits():
 	if st.session_state.traits_select:
 		st.session_state.traits = st.session_state.traits_select
 

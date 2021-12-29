@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd 
 import numpy as np 
 import matplotlib.pyplot as plt
+
+from bokeh.plotting import figure
 from sklearn.decomposition import PCA
 from sklearn.metrics.pairwise import euclidean_distances
 
@@ -47,13 +49,14 @@ def top_traits(player):
 	ind = player.index.values[0]
 	top_traits = player[trait_cols].T.sort_values(ind, ascending=False).head(20).sort_values(ind)
 	
-	fig, ax = plt.subplots(figsize=(8,12))
-	ax.barh(top_traits.index, top_traits[ind], height=0.5)
-	ax.grid('both')
-	plt.yticks(fontsize=16)
-	plt.xticks(fontsize=16)
+	#st.write(top_traits[ind].tolist())
 
-	st.pyplot(fig)
+	fig = figure(title="<Top Traits>", y_range=top_traits.index.tolist(), width=600, height=500)
+	fig.title.text_font_size = '14pt'
+	fig.title.align = 'center'
+	fig.hbar(top_traits.index.tolist(), right=top_traits[ind].tolist(), height=0.2)
+	st.bokeh_chart(fig)
+
 
 @st.cache
 def PCA_reduction(df):
@@ -114,7 +117,7 @@ def player_result(df, player_name, player_fullname):
 	with col4:
 		st.metric("Preferred Foot", player.preferred_foot.values[0])
 
-	col1, col2, col3 = st.columns([3,3,3])
+	col1, col2, col3 = st.columns([2,4,2])
 
 	with col1:
 		val = currency_convert(player.value_eur)
@@ -131,9 +134,11 @@ def player_result(df, player_name, player_fullname):
 	st.text("")
 	st.markdown("###")
 
-	col1, col2 = st.columns(2)
+	col1, col2 = st.columns([1,1.5])
 
 	with col1:
+		st.text("")
+		st.text("")
 		radar_chart(player)
 
 	with col2:

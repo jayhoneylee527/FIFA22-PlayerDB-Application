@@ -17,7 +17,7 @@ view = st.sidebar.radio("View", options)
 if view == "Search Talent":
 	st.header("[FIFA22] Search players by criteria")
 	st.markdown("Adjust the filters below to find the types of players you are looking for.")
-	st.markdown("")
+	st.text("")
 
 	col1, col2 = st.columns(2)
 
@@ -58,22 +58,18 @@ if view == "Search Talent":
 	if 'traits' not in st.session_state:
 		st.session_state.traits = ['overall','age','player_positions']
 
-	#st.session_state.df = df_updated[st.session_state.traits]
-
 	st.multiselect("Traits", trait_cols, default=st.session_state.traits \
-		, on_change=update_df, args=(df_updated,), key='traits_select')
+		, on_change=update_traits, key='traits_select')
 	st.dataframe(df_updated[st.session_state.traits])			
 	st.caption("Click on the column names to sort")
 
 if view == "Look up Player":
+	st.header("[FIFA22] Player Search Engine")
 	player_name = st.sidebar.selectbox('Search Player', df['short_name'])
 	player_fullname = st.sidebar.selectbox('Player Fullname', df[df['short_name'] == player_name]['long_name'])
-	#search = st.sidebar.button("Search")
 
-	st.header("[FIFA22] Player Search Engine")
-
-	#if search:
 	player_result(df, player_name, player_fullname)
+	
 	st.markdown("## Players with Similar Traits")
 	st.markdown("")
 	
