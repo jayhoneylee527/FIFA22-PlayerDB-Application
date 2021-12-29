@@ -55,7 +55,7 @@ if view == "Search Talent":
 
 	st.markdown("### Search Players' Specific Traits")
 
-	select_traits = st.multiselect("Traits", trait_cols, default=None, key='traits_select')
+	select_traits = st.multiselect("Add Attributes", trait_cols, default=None, key='traits_select')
 	st.dataframe(df_updated[['overall','age','player_positions'] + select_traits])
 
 if view == "Look up Player":
