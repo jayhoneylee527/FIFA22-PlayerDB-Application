@@ -1,6 +1,7 @@
 # [Streamlit] FIFA22 Player Databases
 
-The app provides two functionalities:
+Searching players can be cumbersome on FIFA22. I wanted to be able to find talents faster and easier, so I decided to create an app that caters to my (and preferably to other FIFA users') needs. The app provides two functionalities:
+
 ### 1) Search players by filtering
   - Adjust age, market value, player country, league and positions to find top talents under your criteria.
 ### 2) Look up particular player 
