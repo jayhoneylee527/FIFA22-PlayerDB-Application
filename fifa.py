@@ -20,7 +20,7 @@ view = st.sidebar.radio("View", options)
 	
 if view == "Search Talent":
 	st.header("[FIFA22] Search players by criteria")
-	st.markdown("Adjust the filters below to find the types of players you are looking for. Also, you may click on the column name to sort")
+	st.markdown("Adjust the filters below to find the types of players you are looking for. Also, you may click on the column names to sort.")
 	st.text("")
 
 	col1, col2 = st.columns(2)
