@@ -65,7 +65,7 @@ if view == "Look up Player":
 
 	player_result(df, player_name, player_fullname)
 	
-	st.markdown("## Players with Similar Traits")
+	st.markdown("### Players with Similar Traits")
 	st.markdown("")
 	
 	X_reduced = PCA_reduction(df)
