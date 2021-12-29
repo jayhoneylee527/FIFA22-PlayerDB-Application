@@ -82,12 +82,7 @@ def show_similar_players(df, X_reduced, player_name, player_fullname, trait_cols
 	dist['name'] = X_reduced.index
 	similar_name_index = dist.sort_values(by=0).head(30).name.index
 
-	"""
-	if "traits_2" not in st.session_state:
-		st.session_state.traits_2 = ['overall','age','player_positions','club_name']
-	"""
-
-	select_traits = st.multiselect("Traits", trait_cols, default=None, key='traits_select_2')
+	select_traits = st.multiselect("Add Attributes", trait_cols, default=None, key='traits_select_2')
 
 	df_show = df.copy()
 	df_show = df_show.iloc[similar_name_index]
