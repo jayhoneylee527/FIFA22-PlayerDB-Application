@@ -24,8 +24,6 @@ def show_players(df, age_range, val, nation, league, club=None, position=None):
 		df_res = pd.DataFrame()
 		for p in position:	
 			df_res = df_res.append(df[df['player_positions'].str.contains(p)])
-		df_res.sort_values(by='overall')
-
 		df = df_res	
 
 	#Filter nation
@@ -47,16 +45,16 @@ def show_players(df, age_range, val, nation, league, club=None, position=None):
 	df = df[(df['value_eur'] >= lower_bound) & (df['value_eur'] <= upper_bound)]
 	
 	df.set_index('short_name', inplace=True)
+	df.sort_values(by='overall', inplace=True, ascending=False)
 	st.dataframe(df[['overall','potential','age','player_positions','value_eur','wage_eur','club_name']])
 	st.markdown("")
-
 
 	return df
 
 # Callback function 
 def update_df(df_updated):
-	if st.session_state.traits:
-		st.session_state.df = df_updated[st.session_state.traits]
+	if st.session_state.traits_select:
+		st.session_state.traits = st.session_state.traits_select
 
-	return st.session_state.df
+	
 	

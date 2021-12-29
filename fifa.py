@@ -9,7 +9,6 @@ from search_talent import *
 st.set_page_config(layout="wide", page_title="FIFA 22 Player Database")
 
 df = load_players("players_22.csv")
-df = df.sort_values('overall', ascending=False)
 
 options = ["Search Talent", "Look up Player"]
 view = st.sidebar.radio("View", options)
@@ -59,19 +58,29 @@ if view == "Search Talent":
 	if 'traits' not in st.session_state:
 		st.session_state.traits = ['overall','age','player_positions']
 
-	st.session_state.df = df_updated[st.session_state.traits]
+	#st.session_state.df = df_updated[st.session_state.traits]
 
 	st.multiselect("Traits", trait_cols, default=st.session_state.traits \
-		, on_change=update_df, args=(df_updated,), key='traits')
-	st.dataframe(st.session_state.df)			
+		, on_change=update_df, args=(df_updated,), key='traits_select')
+	st.dataframe(df_updated[st.session_state.traits])			
 	st.caption("Click on the column names to sort")
 
 if view == "Look up Player":
 	player_name = st.sidebar.selectbox('Search Player', df['short_name'])
 	player_fullname = st.sidebar.selectbox('Player Fullname', df[df['short_name'] == player_name]['long_name'])
-	search = st.sidebar.button("Search")
+	#search = st.sidebar.button("Search")
 
 	st.header("[FIFA22] Player Search Engine")
 
-	if search:
-		player_result(df, player_name, player_fullname)
+	#if search:
+	player_result(df, player_name, player_fullname)
+	st.markdown("## Players with Similar Traits")
+	st.markdown("")
+	
+	X_reduced = PCA_reduction(df)
+	
+	tmp = ["attacking_","skill_","movement_","power_","mentality_","defending_","goalkeeping_","overall"]
+	trait_cols = [c for c in df.columns if any(i in c for i in tmp)] + \
+		['overall','potential','age','player_positions','value_eur','wage_eur','club_name']
+
+	show_similar_players(df, X_reduced, player_name, player_fullname, trait_cols)

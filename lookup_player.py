@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd 
 import numpy as np 
 import matplotlib.pyplot as plt
+from sklearn.decomposition import PCA
+from sklearn.metrics.pairwise import euclidean_distances
 
 
 def currency_convert(val):
@@ -53,6 +55,42 @@ def top_traits(player):
 
 	st.pyplot(fig)
 
+@st.cache
+def PCA_reduction(df):
+	tmp = ["attacking_","skill_","movement_","power_","mentality_","defending_","goalkeeping_","overall"]
+	trait_cols = [c for c in df.columns if any(i in c for i in tmp)] 
+	X = df[trait_cols].copy()
+	X.fillna(0, inplace=True)
+
+	pca = PCA(n_components=15)
+	X_reduced = pd.DataFrame(pca.fit_transform(X))
+	X_reduced['name'] = df.short_name
+	X_reduced.set_index('name', inplace=True)
+
+	return X_reduced
+
+def update_traits():
+	if st.session_state.traits_select_2:
+		st.session_state.traits_2 = st.session_state.traits_select_2
+
+def show_similar_players(df, X_reduced, player_name, player_fullname, trait_cols):
+	dist = euclidean_distances(X_reduced[X_reduced.index == player_name], X_reduced)
+	dist = pd.DataFrame(dist).T
+	dist['name'] = X_reduced.index
+	similar_name_index = dist.sort_values(by=0).head(30).name.index
+
+	if "traits_2" not in st.session_state:
+		st.session_state.traits_2 = ['overall','age','player_positions','club_name']
+
+	st.multiselect("Traits", trait_cols, default=st.session_state.traits_2, \
+		on_change=update_traits, key='traits_select_2')
+
+	df_show = df.copy()
+	df_show = df_show.iloc[similar_name_index]
+	df_show.set_index('short_name', inplace=True)
+	st.dataframe(df_show[st.session_state.traits_2])
+
+
 def player_result(df, player_name, player_fullname):
 	player = df[(df['short_name'] == player_name) & (df['long_name'] == player_fullname)]
 	st.markdown("## %s" %player_name)
@@ -100,3 +138,5 @@ def player_result(df, player_name, player_fullname):
 
 	with col2:
 		top_traits(player)
+
+
