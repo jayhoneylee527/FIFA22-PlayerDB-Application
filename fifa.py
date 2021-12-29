@@ -64,9 +64,7 @@ if view == "Look up Player":
 	player_fullname = st.sidebar.selectbox('Player Fullname', df[df['short_name'] == player_name]['long_name'])
 
 	player_result(df, player_name, player_fullname)
-	
 	st.markdown("### Players with Similar Traits")
-	st.markdown("")
 	
 	X_reduced = PCA_reduction(df)
 
