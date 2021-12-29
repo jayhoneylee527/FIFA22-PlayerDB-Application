@@ -33,13 +33,13 @@ if view == "Search Talent":
 	nation_list = list(df.nationality_name.unique())
 	nation_list.sort()
 	nation_list.insert(0,"All")
-	nation = col1.selectbox("Player Country", nation_list, index=0)
+	nation = col1.selectbox("Country", nation_list, index=0)
 
-	val = col2.select_slider("Player Value(Million €)", options=np.arange(0, 201), value=(0,200))	
+	val = col2.select_slider("Value(Million €)", options=np.arange(0, 201), value=(0,200))	
 	
 	league_list = list(df.league_name.unique())
 	league_list.insert(0,"All")
-	league = col2.selectbox("Player League", league_list, index=0)
+	league = col2.selectbox("League", league_list, index=0)
 
 	club = None
 
