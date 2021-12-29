@@ -114,7 +114,7 @@ def player_result(df, player_name, player_fullname):
 	with col4:
 		st.metric("Preferred Foot", player.preferred_foot.values[0])
 
-	col1, col2, col3 = st.columns([2,3,2])
+	col1, col2, col3 = st.columns([3,3,3])
 
 	with col1:
 		val = currency_convert(player.value_eur)
