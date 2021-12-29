@@ -46,6 +46,7 @@ def show_players(df, age_range, val, nation, league, club=None, position=None):
 	
 	df.set_index('short_name', inplace=True)
 	df.sort_values(by='overall', inplace=True, ascending=False)
+	df.drop_duplicates(inplace=True)
 	st.dataframe(df[['overall','potential','age','player_positions','value_eur','wage_eur','club_name']])
 	st.markdown("")
 
