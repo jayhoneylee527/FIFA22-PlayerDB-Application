@@ -1,9 +1,11 @@
 # [Streamlit] FIFA22 Player Databases
 
 The app provides two functionalities:
-1) Find players by filtering
-2) Look up particular player 
-
+### 1) Search players by filtering
+  - Adjust age, market value, player country, league and positions to find top talents under your criteria.
+### 2) Look up particular player 
+  - Find a particular player and see basic info including the player's top traits. Also, see list of players with similar traits. 
+  
 The Streamlit App can be accessed [here](https://share.streamlit.io/jayhoneylee527/fifa22-playerdb/main/fifa.py)
 
 ### How are the players of "similar traits" selected?
