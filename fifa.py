@@ -10,6 +10,10 @@ st.set_page_config(layout="wide", page_title="FIFA 22 Player Database")
 
 df = load_players("players_22.csv")
 
+# List columns with player traits 
+tmp = ["attacking_","skill_","movement_","power_","mentality_","defending_","goalkeeping_","overall"]
+trait_cols = [c for c in df.columns if any(i in c for i in tmp)] + ['age', 'player_positions']
+
 options = ["Search Talent", "Look up Player"]
 view = st.sidebar.radio("View", options)
 
@@ -45,23 +49,14 @@ if view == "Search Talent":
 		club_list.insert(0,"All")
 		club = col2.selectbox("Current Club", club_list, index=0)
 
-	st.markdown("")
-	st.markdown("")
+	st.text("")
+	st.text("")
 	df_updated = show_players(df, age_range, val, nation, league, club, position)
 
 	st.markdown("### Search players' specific traits")
 
-	# Further sort by other attributes 
-	tmp = ["attacking_","skill_","movement_","power_","mentality_","defending_","goalkeeping_","overall"]
-	trait_cols = [c for c in df_updated.columns if any(i in c for i in tmp)] + ['age', 'player_positions']
-
-	if 'traits' not in st.session_state:
-		st.session_state.traits = ['overall','age','player_positions']
-
-	st.multiselect("Traits", trait_cols, default=st.session_state.traits \
-		, on_change=update_traits, key='traits_select')
-	st.dataframe(df_updated[st.session_state.traits])			
-	st.caption("Click on the column names to sort")
+	select_traits = st.multiselect("Traits", trait_cols, default=None, key='traits_select')
+	st.dataframe(df_updated[['overall','age','player_positions'] + select_traits])
 
 if view == "Look up Player":
 	st.header("[FIFA22] Player Search Engine")
@@ -74,9 +69,5 @@ if view == "Look up Player":
 	st.markdown("")
 	
 	X_reduced = PCA_reduction(df)
-	
-	tmp = ["attacking_","skill_","movement_","power_","mentality_","defending_","goalkeeping_","overall"]
-	trait_cols = [c for c in df.columns if any(i in c for i in tmp)] + \
-		['overall','potential','age','player_positions','value_eur','wage_eur','club_name']
 
 	show_similar_players(df, X_reduced, player_name, player_fullname, trait_cols)
