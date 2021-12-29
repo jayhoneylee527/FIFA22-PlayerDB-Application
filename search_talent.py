@@ -56,10 +56,5 @@ def update_df(df_updated):
 	if st.session_state.traits_select:
 		st.session_state.traits = st.session_state.traits_select
 
-<<<<<<< HEAD
 	
 	
-=======
-	return st.session_state.df
-	
->>>>>>> d6cada265429d3ac1d10564796234be60905ebae
