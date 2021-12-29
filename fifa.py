@@ -53,7 +53,7 @@ if view == "Search Talent":
 	st.text("")
 	df_updated = show_players(df, age_range, val, nation, league, club, position)
 
-	st.markdown("### Search players' specific traits")
+	st.markdown("### Search Players' Specific Traits")
 
 	select_traits = st.multiselect("Traits", trait_cols, default=None, key='traits_select')
 	st.dataframe(df_updated[['overall','age','player_positions'] + select_traits])
