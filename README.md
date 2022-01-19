@@ -1,4 +1,4 @@
-# [Streamlit] FIFA22 Player Databases
+# [Streamlit] FIFA22 Player Search Engine
 
 Searching players can be cumbersome on FIFA22. I wanted to be able to find talents faster and easier, so I decided to create an app that caters to my (and preferably to other FIFA users') needs. The app provides two functionalities:
 
@@ -10,7 +10,7 @@ Searching players can be cumbersome on FIFA22. I wanted to be able to find talen
 The Streamlit App can be accessed [here](https://share.streamlit.io/jayhoneylee527/fifa22-playerdb/main/fifa.py)
 
 ### Data Source
-players.csv has been downloaded from [Kaggle](https://www.kaggle.com/stefanoleone992/fifa-22-complete-player-dataset?select=players_22.csv)
+players_22.csv has been downloaded from [Kaggle](https://www.kaggle.com/stefanoleone992/fifa-22-complete-player-dataset?select=players_22.csv).
 
 ### How are the players of "similar traits" selected?
 
