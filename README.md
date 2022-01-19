@@ -9,6 +9,9 @@ Searching players can be cumbersome on FIFA22. I wanted to be able to find talen
   
 The Streamlit App can be accessed [here](https://share.streamlit.io/jayhoneylee527/fifa22-playerdb/main/fifa.py)
 
+### Data Source
+players.csv has been downloaded from [Kaggle](https://www.kaggle.com/stefanoleone992/fifa-22-complete-player-dataset?select=players_22.csv)
+
 ### How are the players of "similar traits" selected?
 
 Based on 36 traits of each player, PCA reduces the trait dimensions down to 15. (~98% explained variance)
