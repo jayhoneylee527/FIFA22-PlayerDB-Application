@@ -9,6 +9,10 @@ Searching players can be cumbersome on FIFA22. I wanted to be able to find talen
   
 The Streamlit App can be accessed [here](https://share.streamlit.io/jayhoneylee527/fifa22-playerdb/main/fifa.py)
 
+<p align="center">
+  <img src="images/messi_dash.PNG" width="600" height="400">
+</p>
+
 ### Data Source
 players_22.csv has been downloaded from [Kaggle](https://www.kaggle.com/stefanoleone992/fifa-22-complete-player-dataset?select=players_22.csv).
 
